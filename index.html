@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zheqing (Bill) Zhu - Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a2a3a;
+            --secondary-color: #2c3e50;
+            --accent-color: #00b8d4;
+            --text-color: #f5f5f5;
+            --light-gray: #e0e0e0;
+            --dark-gray: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(26, 42, 58, 0.95);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .logo:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #0097a7;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .experience-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .experience-card {
+            width: 48%;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .experience-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .experience-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--light-gray);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .project-card p {
+            margin-bottom: 20px;
+        }
+        
+        .publications-list {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .publications-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .publications-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .education-awards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .education, .awards {
+            width: 48%;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .education h3, .awards h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .education-item, .award-item {
+            margin-bottom: 20px;
+        }
+        
+        .education-item h4, .award-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact {
+            background-color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border-radius: 50%;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--dark-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 20px 0;
+            }
+            
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-top: 30px;
+            }
+            
+            .hero-image {
+                margin-bottom: 30px;
+            }
+            
+            .experience-card, .education, .awards {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Zheqing (Bill) Zhu</a>
+            <div class="mobile-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Zheqing (Bill) Zhu</h1>
+                <h2>Founder & CEO at Pokee AI | Building the Next Generation of AI Agents</h2>
+                <p>Visionary entrepreneur and AI researcher with expertise in reinforcement learning, recommendation systems, and multi-agent systems. Dedicated to bridging the gap between theoretical AI research and practical, real-world applications.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://pbs.twimg.com/media/GbVEef5bEAAzhYn?format=jpg&name=large" alt="Zheqing (Bill) Zhu">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am the Founder and CEO of Pokee AI, where we're developing the next generation of interactive, personalized, and scalable AI agents using reinforcement learning. Our mission is to create AI systems that can adapt to human needs and preferences while maintaining safety and reliability.</p>
+                    <p>Prior to founding Pokee AI, I spent 7 years at Meta AI as the Head of the Applied Reinforcement Learning Group. During my tenure, I led the development of RL solutions for recommendation systems and advertising, playing a key role in scaling AI technologies across Meta's family of apps.</p>
+                    <p>I hold a Ph.D. in Reinforcement Learning from Stanford University, where my research focused on developing algorithms for safe and adaptive AI systems. My academic background and industry experience have given me a unique perspective on how to translate cutting-edge AI research into practical applications that can benefit millions of users.</p>
+                    <p>My research interests include reinforcement learning, multi-agent systems, recommendation algorithms, and safe AI deployment. I'm particularly passionate about creating AI systems that can learn from human feedback and adapt to changing environments while maintaining safety guarantees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-container">
+                <div class="experience-card">
+                    <h3>Pokee AI</h3>
+                    <h4>Founder & CEO | 2024–Present</h4>
+                    <p>Leading the development of interactive, personalized, and scalable AI agents using reinforcement learning. At Pokee AI, we're building the next generation of AI systems that can adapt to human needs and preferences while maintaining safety and reliability.</p>
+                </div>
+                <div class="experience-card">
+                    <h3>Meta AI</h3>
+                    <h4>Head of Applied RL Group, Senior Staff TLM | 2017–2024</h4>
+                    <p>Led the development of reinforcement learning solutions for recommendation systems and advertising. Played a key role in scaling AI technologies across Meta's family of apps, including Facebook, Instagram, and WhatsApp. Managed a team of researchers and engineers focused on applying RL to real-world problems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Pearl (Meta AI)</h3>
+                        <p>A production-ready, open-source Reinforcement Learning AI agent library designed for scalability and ease of use. Pearl provides a comprehensive framework for developing, training, and deploying RL agents in production environments.</p>
+                        <a href="https://github.com/facebookresearch/Pearl" class="btn" target="_blank">View on GitHub</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Multi-Agent Safe Planning</h3>
+                        <p>Research on algorithms for safe robot navigation in complex environments. This project focuses on developing multi-agent systems that can coordinate their actions while maintaining safety guarantees, even in dynamic and uncertain environments.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Federated Learning with LLMs</h3>
+                        <p>Projects on privacy-preserving collaborative model training. This research explores how large language models can be trained across distributed datasets without compromising user privacy, enabling more personalized and secure AI systems.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="publications-list">
+                <p>I have published numerous papers in top-tier AI conferences and journals, focusing on reinforcement learning, multi-agent systems, and recommendation algorithms. My research has been cited over 1,000 times and has contributed to advancements in both theoretical and applied AI.</p>
+                <p>For a complete list of my publications, please visit my <a href="https://scholar.google.com/citations?hl=en&user=rPnlWzoAAAAJ" target="_blank">Google Scholar profile</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education & Awards</h2>
+            <div class="education-awards">
+                <div class="education">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <h4>Stanford University</h4>
+                        <p>Ph.D. in Reinforcement Learning</p>
+                    </div>
+                    <div class="education-item">
+                        <h4>Duke University</h4>
+                        <p>B.S. in Computer Science (Graduated with Highest Distinction)</p>
+                    </div>
+                </div>
+                <div class="awards">
+                    <h3>Awards</h3>
+                    <div class="award-item">
+                        <h4>Alex Vasilos Memorial Award</h4>
+                        <p>Duke University</p>
+                    </div>
+                    <div class="award-item">
+                        <h4>Summa Cum Laude</h4>
+                        <p>Duke University</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/zheqingzhubill" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/ZheqingZhu" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://zheqingbillzhu.substack.com" target="_blank"><i class="fas fa-rss"></i></a>
+                <a href="https://scholar.google.com/citations?hl=en&user=rPnlWzoAAAAJ" target="_blank"><i class="fas fa-graduation-cap"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Zheqing (Bill) Zhu. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navMenu = document.querySelector('nav ul');
+            
+            mobileMenu.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.padding = '10px 0';
+                    header.style.backgroundColor = 'rgba(26, 42, 58, 0.95)';
+                } else {
+                    header.style.padding = '20px 0';
+                    header.style.backgroundColor = 'rgba(26, 42, 58, 0.95)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
